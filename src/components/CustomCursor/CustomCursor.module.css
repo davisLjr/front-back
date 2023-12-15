@@ -1,0 +1,17 @@
+/* CustomCursor.module.css */
+.cursor {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transition: width 0.3s, height 0.3s;
+  will-change: width, height;
+}
+
+.hovered {
+  width: 40px; /* Ajusta el tamaño cuando el cursor está sobre el botón o enlace */
+  height: 40px;
+}
