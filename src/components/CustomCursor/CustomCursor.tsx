@@ -7,8 +7,8 @@ const CustomCursor = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    const updateCursorPosition = (e: {clientX: number; clientY: number}) => {
-      setPosition({x: e.clientX - 25, y: e.clientY - 25});
+    const updateCursorPosition = (e: MouseEvent) => {
+      setPosition({x: e.clientX - 15, y: e.clientY - 15});
 
       // Lógica para detectar si el cursor está sobre el botón o enlace
       const buttonOrLink = document.elementFromPoint(e.clientX, e.clientY);
@@ -25,10 +25,23 @@ const CustomCursor = () => {
       }
     };
 
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+      setIsHovered(false);
+      setPosition({x: -100, y: -100}); // Establecer posición fuera de la ventana
+    };
+
     document.addEventListener("mousemove", updateCursorPosition);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       document.removeEventListener("mousemove", updateCursorPosition);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseout", handleMouseLeave);
     };
   }, []);
 
